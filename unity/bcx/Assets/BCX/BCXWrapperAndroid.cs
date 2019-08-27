@@ -20,7 +20,7 @@ namespace BCX
 #if !UNITY_EDITOR
             using (AndroidJavaClass jc = new AndroidJavaClass(WRAPPER_CLASS))
             {
-                jc.CallStatic("connect", chainId, nodeUrls, faucetUrl, coreAsset, isOpenLog);
+                jc.CallStatic("connect", chainId, string.Join(",", nodeUrls.ToArray()), faucetUrl, coreAsset, isOpenLog);
             }
 #endif
         }
@@ -331,10 +331,10 @@ namespace BCX
             BCXWrapperAndroid.BCXEvent.Invoke(evt, json);
         }
 
-        private static void Invoke(string f, params object[] arr)
+        private static JSONObject params2JSON(params object[] objs)
         {
             JSONObject objP = new JSONObject(JSONObject.Type.ARRAY);
-            foreach (var item in arr)
+            foreach (var item in objs)
             {
                 string s = item as string;
                 if (null != s)
@@ -359,9 +359,14 @@ namespace BCX
                     objP.Add(objL);
                 }
             }
+            return objP;
+        }
+
+        private static void Invoke(string f, params object[] arr)
+        {
             JSONObject obj = new JSONObject(JSONObject.Type.OBJECT);
             obj.AddField("f", f);
-            obj.AddField("p", objP);
+            obj.AddField("p", params2JSON(arr));
 
 #if !UNITY_EDITOR
             using (AndroidJavaClass jc = new AndroidJavaClass(WRAPPER_CLASS))

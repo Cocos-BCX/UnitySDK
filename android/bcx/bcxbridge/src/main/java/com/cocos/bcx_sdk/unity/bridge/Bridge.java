@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Bridge {
@@ -128,7 +129,7 @@ public class Bridge {
 
 //    public static void connect(String chainId, List<String> nodeUrls, String faucetUrl, String coreAsset, boolean isOpenLog, Activity activity) {
 //        Activity act = null != activity ? activity : UnityPlayer.currentActivity;
-    public static void connect(String chainId, List<String> nodeUrls, String faucetUrl, String coreAsset, boolean isOpenLog) {
+    public static void connect(String chainId, String nodeUrlsString, String faucetUrl, String coreAsset, boolean isOpenLog) {
         Activity act = UnityPlayer.currentActivity;
         if (null == act) {
             Log.e(TAG, "UnityPlayer.currentActivity is null");
@@ -140,6 +141,7 @@ public class Bridge {
             return;
         }
         Context ctx = app;
+        List<String> nodeUrls = new ArrayList<String>(Arrays.asList(nodeUrlsString.split(",")));
 
         CocosBcxApiWrapper.getBcxInstance().init(ctx);
         CocosBcxApiWrapper.getBcxInstance().connect(ctx, chainId, nodeUrls, faucetUrl, coreAsset, isOpenLog,
