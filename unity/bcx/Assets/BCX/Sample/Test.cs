@@ -33,6 +33,7 @@ public class Test : MonoBehaviour {
 		if (null == acc || null == pw) {
 			return;
 		}
+        log("to password_login");
 		BCX.BCXWrapper.password_login(acc.text, pw.text);
 	}
 
