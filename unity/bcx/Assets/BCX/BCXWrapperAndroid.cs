@@ -25,16 +25,6 @@ namespace BCX
 #endif
         }
 
-        public static void create_password_account( string strAccountName,  string strPassword,  bool isAutoLogin)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccountName, strPassword, isAutoLogin);
-        }
-
-        public static void create_wallet_account(string strAccountName, string strPassword, bool isAutoLogin)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccountName, strPassword, isAutoLogin);
-        }
-
         public static void create_account(string strAccountName, string strPassword, int accountType, bool isAutoLogin)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccountName, strPassword, accountType, isAutoLogin);
@@ -145,12 +135,12 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, order_id, fee_symbol);
         }
 
-        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id)
+        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id, string fee_paying_asset)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, order_Id);
         }
 
-        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id)
+        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id, string fee_paying_asset)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, fee_paying_account, order_Id);
         }
@@ -320,7 +310,7 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
-        public static void log_out()
+        public static void log_out(string accountName)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
@@ -374,21 +364,6 @@ namespace BCX
                 jc.CallStatic("reflectionCall", obj.ToString());
             }
 #endif
-        }
-
-        private static bool IsNumber(object value)
-        {
-            return value is sbyte
-                    || value is byte
-                    || value is short
-                    || value is ushort
-                    || value is int
-                    || value is uint
-                    || value is long
-                    || value is ulong
-                    || value is float
-                    || value is double
-                    || value is decimal;
         }
 
     }

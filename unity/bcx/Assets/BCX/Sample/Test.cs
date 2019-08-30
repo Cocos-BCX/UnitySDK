@@ -14,12 +14,12 @@ public class Test : MonoBehaviour {
 	void Start () {
 		BCX.BCXWrapper.BCXEvent += BCXCallback;
 
-		List<string> mListNode = new List<string> {"ws://39.106.126.54:8049", "ws://39.106.126.54:8049"};
+		string nodeUrl = "ws://39.106.126.54:8049";
         string faucetUrl = "http://47.93.62.96:8041";
         string chainId = "7d89b84f22af0b150780a2b121aa6c715b19261c8b7fe0fda3a564574ed7d3e9";
         string coreAsset = "COCOS";
         bool isOpenLog = true;
-        BCX.BCXWrapper.connect(chainId, mListNode, faucetUrl, coreAsset, isOpenLog);
+        BCX.BCXWrapper.connect(chainId, nodeUrl, faucetUrl, coreAsset, isOpenLog);
 	}
 	
 	// Update is called once per frame
