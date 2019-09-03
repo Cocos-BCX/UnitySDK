@@ -22,6 +22,8 @@ public class ProjectFileHook
         if (BuildTarget.Android == target) {
             string buildGradle = path + "/" + Application.productName + "/build.gradle";
             fixBuildGradle(buildGradle);
+        } else if (BuildTarget.iOS == target) {
+            geniOSSDK(path);
         }
     }
 
@@ -50,6 +52,35 @@ public class ProjectFileHook
             lines.Add(line);
         }
         File.WriteAllLines(path, lines.ToArray());
+    }
+
+    private static void geniOSSDK(string path)
+    {
+        extractTarGz(Utils.PathCombine(Application.dataPath, "BCX", "Editor", "iOS", "BCXUnitySDK.tar.gz"), path);
+
+        string podfile = Utils.PathCombine(path, "Podfile");
+        if (!System.IO.File.Exists(podfile))
+        {
+            string podfileContent =
+             "platform :ios, '8.0'\r\n"
+            +"target 'Unity-iPhone' do\r\n"
+            +"    use_frameworks!\r\n"
+            +"    pod 'CocosSDK', :path => './BCXUnitySDK/'\r\n"
+            +"    target 'Unity-iPhone Tests' do\r\n"
+            +"        inherit! :search_paths\r\n"
+            +"    end\r\n"
+            +"end\r\n";
+            System.IO.File.WriteAllText(podfile, podfileContent);
+        }
+    }
+
+    private static void extractTarGz(string gzfile, string dstPath)
+    {
+        if (Directory.Exists(dstPath))
+        {
+            Directory.Delete(dstPath, true);
+        }
+        Tar.ExtractTarGz(gzfile, dstPath);
     }
 
 }
