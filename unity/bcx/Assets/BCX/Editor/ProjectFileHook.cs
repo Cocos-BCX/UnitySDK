@@ -56,7 +56,9 @@ public class ProjectFileHook
 
     private static void geniOSSDK(string path)
     {
-        extractTarGz(Utils.PathCombine(Application.dataPath, "BCX", "Editor", "iOS", "BCXUnitySDK.tar.gz"), path);
+        extractTarGz(
+            Utils.PathCombine(Application.dataPath, "BCX", "Editor", "iOS", "BCXUnitySDK.tar.gz"),
+            Utils.PathCombine(path, "BCX"));
 
         string podfile = Utils.PathCombine(path, "Podfile");
         if (!System.IO.File.Exists(podfile))
@@ -65,7 +67,7 @@ public class ProjectFileHook
              "platform :ios, '8.0'\r\n"
             +"target 'Unity-iPhone' do\r\n"
             +"    use_frameworks!\r\n"
-            +"    pod 'CocosSDK', :path => './BCXUnitySDK/'\r\n"
+            +"    pod 'CocosSDK', :path => './BCX/BCXUnitySDK/'\r\n"
             +"    target 'Unity-iPhone Tests' do\r\n"
             +"        inherit! :search_paths\r\n"
             +"    end\r\n"
