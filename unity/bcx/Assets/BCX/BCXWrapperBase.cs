@@ -5,6 +5,7 @@ namespace BCX
 {
     public class BCXWrapperBase
     {
+        public static string VERSION = "0.0.1";
         public delegate void BCXEventHandler(string evt, string json);
 
         protected static bool IsNumber(object value)

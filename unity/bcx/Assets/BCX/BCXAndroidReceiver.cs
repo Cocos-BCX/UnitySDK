@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace BCX
+{
 public class BCXAndroidReceiver : MonoBehaviour {
 
 #if UNITY_ANDROID
@@ -298,7 +300,14 @@ public class BCXAndroidReceiver : MonoBehaviour {
 
 	public void get_version_info(string json)
 	{
-		BCX.BCXWrapperAndroid.notify_bcx_event(System.Reflection.MethodBase.GetCurrentMethod().Name, json);
+		JSONObject jObj = new JSONObject(json);
+		JSONObject codeObj = jObj.GetField("code");
+		JSONObject dataObj = jObj.GetField("data");
+		if (1 == codeObj.n) {
+			dataObj.str = BCXWrapperBase.VERSION + "-" + dataObj.str;
+		}
+		jObj.SetField("data", dataObj);
+		BCX.BCXWrapperAndroid.notify_bcx_event(System.Reflection.MethodBase.GetCurrentMethod().Name, jObj.ToString());
 	}
 
 	public void log_out(string json)
@@ -307,6 +316,8 @@ public class BCXAndroidReceiver : MonoBehaviour {
 	}
 
 #endif
+
+}
 
 }
 

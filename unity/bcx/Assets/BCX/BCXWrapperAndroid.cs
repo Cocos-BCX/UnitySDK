@@ -15,19 +15,27 @@ namespace BCX
         public static event BCXEventHandler BCXEvent;
         private static String WRAPPER_CLASS = "com.cocos.bcx_sdk.unity.bridge.Bridge";
 
-        public static void connect(string chainId, List<string> nodeUrls, string faucetUrl, string coreAsset, bool isOpenLog)
+        public static void connect(string chainId, string nodeUrl, string faucetUrl, string coreAsset, bool isOpenLog)
         {
 #if !UNITY_EDITOR
             using (AndroidJavaClass jc = new AndroidJavaClass(WRAPPER_CLASS))
             {
-                jc.CallStatic("connect", chainId, string.Join(",", nodeUrls.ToArray()), faucetUrl, coreAsset, isOpenLog);
+                jc.CallStatic("connect", chainId, String.Format("{0},{0}", nodeUrl), faucetUrl, coreAsset, isOpenLog);
             }
 #endif
         }
 
-        public static void create_account(string strAccountName, string strPassword, int accountType, bool isAutoLogin)
+        /*
+         * accountType: "ACCOUNT", "WALLET"
+         */
+        public static void create_account(string strAccountName, string strPassword, string accountType, bool isAutoLogin)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccountName, strPassword, accountType, isAutoLogin);
+#if !UNITY_EDITOR
+            using (AndroidJavaClass jc = new AndroidJavaClass(WRAPPER_CLASS))
+            {
+                jc.CallStatic("create_account", strAccountName, strPassword, accountType, isAutoLogin);
+            }
+#endif
         }
 
         public static void get_dao_account_objects()
@@ -36,26 +44,6 @@ namespace BCX
         }
 
         public static void get_accounts(string accountId)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountId);
-        }
-
-        public static void lookup_account_names(string account_name)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, account_name);
-        }
-
-        public static void get_account_object(string strAccountNameOrId)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccountNameOrId);
-        }
-
-        public static void get_account_id_by_name(string accountName)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountName);
-        }
-
-        public static void get_account_name_by_id(string accountId)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountId);
         }
@@ -85,19 +73,9 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, asset_id_or_symbol, world_view_name_or_ids, baseDescribe, pageSize, page);
         }
 
-        public static void list_nh_asset_order(int page, int pageSize)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, page, pageSize);
-        }
-
         public static void lookup_world_view(List<string> world_view_names)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, world_view_names);
-        }
-
-        public static void get_nh_creator(string account_id_or_name)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, account_id_or_name);
         }
 
         public static void list_nh_asset_by_creator(string account_id, int page, int pageSize)
@@ -145,14 +123,14 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, fee_paying_account, order_Id);
         }
 
-        public static void create_nh_asset_order_fee(string otcaccount, string seller, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_millis)
+        public static void create_nh_asset_order_fee(string otcaccount, string seller, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_millis);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_second * 1000);
         }
 
-        public static void create_nh_asset_order(string otcaccount, string seller, string password, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_millis)
+        public static void create_nh_asset_order(string otcaccount, string seller, string password, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, password, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_millis);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, password, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_second * 1000);
         }
 
         public static void upgrade_to_lifetime_member_fee(string upgrade_account_id_or_symbol, string fee_paying_asset_id_or_symbol)
@@ -165,39 +143,9 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, upgrade_account_id_or_symbol, upgrade_account_password, fee_paying_asset_id_or_symbol);
         }
 
-        public static void create_child_account_fee(string child_account, string child_account_password, string registrar_account_id_or_symbol, string pay_asset_symbol_or_id, string accountType)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, child_account, child_account_password, registrar_account_id_or_symbol, pay_asset_symbol_or_id, accountType);
-        }
-
-        public static void create_child_account(string child_account, string child_account_password, string registrar_account_id_or_symbol, string registrar_account_password, string pay_asset_symbol_or_id, string accountType)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, child_account, child_account_password, registrar_account_id_or_symbol, registrar_account_password, pay_asset_symbol_or_id, accountType);
-        }
-
-        public static void get_objects(List<string> ids)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, ids);
-        }
-
-        public static void get_objects(string id)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, id);
-        }
-
         public static void get_contract(string contractNameOrId)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, contractNameOrId);
-        }
-
-        public static void delete_account_by_name(string accountName)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountName);
-        }
-
-        public static void delete_account_by_id(string accountId)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountId);
         }
 
         public static void password_login(string strAccountName, string strPassword)
@@ -260,11 +208,6 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountName, nLimit);
         }
 
-        public static void get_all_account_balances(string accountId)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountId);
-        }
-
         public static void get_account_balances(string accountId, string assetsId)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountId, assetsId);
@@ -273,11 +216,6 @@ namespace BCX
         public static void get_block_header(double nBlockNumber)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, nBlockNumber);
-        }
-
-        public static void get_global_properties()
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
 
         public static void get_dynamic_global_properties()
@@ -298,11 +236,6 @@ namespace BCX
         public static void decrypt_memo_message(string accountName, string password, string mMemoJson)
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountName, password, mMemoJson);
-        }
-
-        public static void get_payment_qrcode_json(string accountName, string amount, string assetSymbol)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountName, amount, assetSymbol);
         }
 
         public static void get_version_info()
