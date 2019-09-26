@@ -3,6 +3,10 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 pushd $SHELL_FOLDER
 
+echo ''
+echo '>>> Generated BCX-iOS-SDK'
+echo ''
+
 cp -r iOSSDK BCXUnitySDK
 
 cd BCXUnitySDK
@@ -18,5 +22,7 @@ cp -v ./BCXUnitySDK.tar.gz ../unity/bcx/Assets/BCX/Editor/iOS/
 
 popd
 
-echo 'Done'
+echo ''
+echo '>>> Generated BCX-iOS-SDK Done'
+echo ''
 
