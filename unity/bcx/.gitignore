@@ -1,7 +1,9 @@
 
 .DS_Store
 Exports/
-
+Assets/BCX/Editor/iOS/BCXUnitySDK.tar.gz
+Assets/BCX/Plugins/Android/bcx_sdk.aar
+Assets/BCX/Plugins/Android/bcxbridge.aar
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
