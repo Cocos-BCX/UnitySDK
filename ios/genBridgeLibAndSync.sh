@@ -18,7 +18,7 @@ cd ..
 tar -czvf BCXUnitySDK.tar.gz BCXUnitySDK
 rm -rf ./BCXUnitySDK
 
-cp -v ./BCXUnitySDK.tar.gz ../unity/bcx/Assets/BCX/Editor/iOS/
+mv -v ./BCXUnitySDK.tar.gz ../unity/bcx/Assets/BCX/Editor/iOS/
 
 popd
 

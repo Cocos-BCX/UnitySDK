@@ -1,25 +1,27 @@
 # BCX-Unity-SDK
 
 
-## Introduction
+## 介绍
 
-The BCX-Unity-SDK is based on [BCX-Android-SDK](https://github.com/Cocos-BCX/AndroidSdk) and [BCX-iOS-SDK](https://github.com/Cocos-BCX/iOSSDK) , which provide a series of interfaces for Unity to operate the BCX blockchain, allowing users to handle logins, transfers, trading assets, calling contracts, and more.
+BCX-Unity-SDK 的实现基于 [BCX-Android-SDK](https://github.com/Cocos-BCX/AndroidSdk) 和 [BCX-iOS-SDK](https://github.com/Cocos-BCX/iOSSDK) , 它针对 Unity 封装了一系列操作 BCX 区块链的接口, 让用户处理登录, 转帐, 交易资产, 调用合约等事宜.
 
-## Project Description
+## 工程简介
 
-### Directory Introduction
+### 目录简介
 
-* `android` a wrapper library of BCX-Android-SDK, so can easily call from Unity
-* `ios` a wrapper library of BCX-iOS-SDK, so can easily call from Unity
-* `unity` BCX-Unity-SDK Project, BCX-Unity-SDK is export from this project
+* `android` 对 BCX-Android-SDK 作封装, 方便从 Unity 调用其接口
+* `ios` 对 BCX-iOS-SDK 作封装, 方便从 Unity 调用其接口
+* `unity` BCX-Unity-SDK 工程, 需要导出 BCX-Unity-SDK 也是直接把这个工程导出
 
-### Script Introduction
+### 脚本简介
 
-`tool/genLibAndSync.sh` Generate Android/iOS library and sync them to the BCX-Unity-SDK project.
+`tool/genLibAndSync.sh` 为 BCX-Unity-SDK 生成 Android/iOS 侧的库文件，并同步到 BCX-Unity-SDK 工程中.
 
-## BCX-Unity-SDK
+## BCX-Unity-SDK 工程
 
-## Environment
+以下会介绍 BCX-Unity-SDK 的运行的前提, 如何使用等
+
+## 环境
 
 ### Android
 
@@ -34,30 +36,29 @@ The BCX-Unity-SDK is based on [BCX-Android-SDK](https://github.com/Cocos-BCX/And
 
 1. [Untiy 2018.1+](https://unity.com/)
 
-## Android/iOS Library
+## Android/iOS 库文件
 
-Run the following command to automatically generate the library file of the corresponding platform.
+运行以下命令, 可以自动生成对应平台的库文件.
 
 ```bash
 ./tool/genLibAndSync.sh
 ```
 
-## Test
+## 测试
 
 ### Android
 
-1. Export Android project in Unity, with follow settings:
+1. Unity 中导出 Android 工程, 设置如下:
 
 ![](./doc/android_export_setting.png)
 
-2. Open the exported project with Android Studio
-3. Compile, Run
+2. 用 Android Studio 打开导出后的工程
+3. 编译, 运行
 
-PS. When compiling on Android, you may got a similar error in `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536). This is because Android has a limit on the number of methods in a single jar.
+PS. 在 Android 上编译时, 你可能会遇到 `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536)` 类似的错误, 这是因为Android 对单个 jar 的方法数有限制.
 
-you can fix it with the solution below:
+要解决这个问题, 你可以如下修改 build.gradle 文件:
 
-build.gradle
 ```gradle
 ...
 dependencies {
@@ -77,30 +78,30 @@ android {
 ...
 ```
 
-ref url: https://stackoverflow.com/questions/48249633/errorcannot-fit-requested-classes-in-a-single-dex-file-try-supplying-a-main-dex .
+参见URL: https://www.jianshu.com/p/95211b445154
 
 ### iOS
 
-1. Export iOS project in Unity
-2. run `pod install` under the exported iOS project. (if you don't have `CocoaPods` installed, install it first)
-3. open `Unity-iPhone.xcworkspace` with Xcode
-4. Modify the configuration of `Secp256k1_A` as shown in the figure:
+1. Unity 中导出 iOS 工程
+2. 在导出后的 iOS 工程目录下, 运行 `pod install` (如果没有安装 `CocoaPods` , 需要先安装)
+3. 完成后，打开 `Unity-iPhone.xcworkspace`
+4. 在 Xcode 中, 修改 `Secp256k1_A` 的配置, 如图:
 
 ![](./doc/xcode_secp_target_setting.png)
 
-5. Compile, Run
+5. 编译, 运行
 
 
-## Hint:
+## 提示:
 
-1. Many interfaces in BCX-iOS-SDK only receive id.  id and name  are both accepted in BCX-Android-SDK, so it is recommended to use id as much as possible. for example:
+1. BCX-Unity-SDK 中的接口很多只接收 id , BCX-Android-SDK 中的接口基本 id, name 都接受, 所以建议在使用中, 尽量传 id . 比如:
 
 ```C#
 public static void calculate_invoking_contract_fee(string strAccount, string feeAssetSymbol, string contractId, string functionName, string param)
 ```
 
-you can pass "COCOS"  or "1.3.0" to feeAssetSymbol parameter in Android.
-But in iOS, only "1.3.0" can be passed.
+feeAssetSymbol 参数在 Android 中传 "COCOS", 或 “1.3.0” 都可以
+但是在 iOS 中, 只能传 "1.3.0".
 
 
 ## API
@@ -313,9 +314,9 @@ public static void get_transaction_by_id(string tr_id)
 public static void decrypt_memo_message(string accountName, string password, string mMemoJson)
 ```
 
->>Get the version of BCX-Unity-SDK
+>>取 BCX-Unity-SDK 的版本信息
 
->>The version structure is {BCX-Unity-SDK-Version}-{BCX-iOS-SDK-Version/BCX-Android-SDK-Version}
+>>版本结构为 {BCX-Unity-SDK-Version}-{BCX-iOS-SDK-Version/BCX-Android-SDK-Version}
 ```C#
 public static void get_version_info()
 ```
@@ -324,4 +325,16 @@ public static void get_version_info()
 ```C#
 public static void log_out(string accountName)
 ```
+
+
+
+
+未来可用用测试的 trid
+
+3e676dd898f4b50c99b59febab4f424d57776ffbf9af9966957f0da546d2841b
+
+"hugoo" : "1.2.72961"
+contract_id" : "1.16.42"
+
+
 
