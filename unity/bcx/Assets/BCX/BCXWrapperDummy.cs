@@ -8,9 +8,10 @@ namespace BCX
 
     public class BCXWrapperDummy : BCXWrapperBase
     {
+        public static event BCXEventHandler BCXEvent;
         private static String DUMMY_NOTE = "Dummy on current platform";
 
-        public static void connect(string chainId, List<string> nodeUrls, string faucetUrl, string coreAsset, bool isOpenLog)
+        public static void connect(string chainId, string nodeUrlString, string faucetUrl, string coreAsset, bool isOpenLog)
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -25,7 +26,7 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void create_account(string strAccountName, string strPassword, int accountType, bool isAutoLogin)
+        public static void create_account(string strAccountName, string strPassword, string accountType, bool isAutoLogin)
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -135,12 +136,12 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id)
+        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id, string fee_paying_asset)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id)
+        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id, string fee_paying_asset)
         {
             Debug.Log(DUMMY_NOTE);
         }
