@@ -56,6 +56,7 @@ git clone https://github.com/Cocos-BCX/UnitySDK.git
 2. update submodule
 
 ```bash
+cd UnitySDK
 git submodule update --init
 ```
 
