@@ -33,6 +33,7 @@ The BCX-Unity-SDK is based on [BCX-Android-SDK](https://github.com/Cocos-BCX/And
 ### Unity
 
 1. [Untiy 2018.1+](https://unity.com/)
+2. git
 
 ## Android/iOS Library
 
@@ -46,12 +47,30 @@ Run the following command to automatically generate the library file of the corr
 
 ### Android
 
-1. Export Android project in Unity, with follow settings:
+1. clone bcx-unity by run:
+
+```bash
+git clone https://github.com/Cocos-BCX/UnitySDK.git
+```
+
+2. update submodule
+
+```bash
+git submodule update --init
+```
+
+3. generate library
+
+```bash
+tool/genLibAndSync.sh
+```
+
+4. Export Android project in Unity, with follow settings:
 
 ![](./doc/android_export_setting.png)
 
-2. Open the exported project with Android Studio
-3. Compile, Run
+5. Open the exported project with Android Studio
+6. Compile, Run
 
 PS. When compiling on Android, you may got a similar error in `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536). This is because Android has a limit on the number of methods in a single jar.
 
