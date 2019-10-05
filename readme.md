@@ -47,16 +47,15 @@ Run the following command to automatically generate the library file of the corr
 
 ### Android
 
-1. clone bcx-unity by run:
+1. clone bcx-unity (If you're already clone, ignore this step)
 
 ```bash
 git clone https://github.com/Cocos-BCX/UnitySDK.git
 ```
 
-2. update submodule
+2. update submodule under repo root path
 
 ```bash
-cd UnitySDK
 git submodule update --init
 ```
 
@@ -101,14 +100,32 @@ ref url: https://stackoverflow.com/questions/48249633/errorcannot-fit-requested-
 
 ### iOS
 
-1. Export iOS project in Unity
-2. run `pod install` under the exported iOS project. (if you don't have `CocoaPods` installed, install it first)
-3. open `Unity-iPhone.xcworkspace` with Xcode
-4. Modify the configuration of `Secp256k1_A` as shown in the figure:
+1. clone bcx-unity (If you're already clone, ignore this step)
+
+```bash
+git clone https://github.com/Cocos-BCX/UnitySDK.git
+```
+
+2. update submodule under repo root path
+
+```bash
+git submodule update --init
+```
+
+3. generate library
+
+```bash
+tool/genLibAndSync.sh
+```
+
+4. Export iOS project in Unity
+5. run `pod install` under the exported iOS project. (if you don't have `CocoaPods` installed, install it first)
+6. open `Unity-iPhone.xcworkspace` with Xcode
+7. Modify the configuration of `Secp256k1_A` as shown in the figure:
 
 ![](./doc/xcode_secp_target_setting.png)
 
-5. Compile, Run
+8. Compile, Run
 
 
 ## Hint:
