@@ -1,6 +1,6 @@
 [submodule "android/AndroidSdk"]
 	path = android/AndroidSdk
-	url = git@github.com:Cocos-BCX/AndroidSdk.git
+	url = https://github.com/Cocos-BCX/AndroidSdk.git
 [submodule "ios/iOSSDK"]
 	path = ios/iOSSDK
-	url = git@github.com:hugohuang1111/iOSSDK.git
+	url = https://github.com/hugohuang1111/iOSSDK.git
