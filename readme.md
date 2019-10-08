@@ -59,7 +59,7 @@ git clone https://github.com/Cocos-BCX/UnitySDK.git
 git submodule update --init
 ```
 
-3. generate library
+3. generate library (If you didn't modify the android/ios library, you can ignore this step without rebuilding)
 
 ```bash
 tool/genLibAndSync.sh
@@ -72,7 +72,7 @@ tool/genLibAndSync.sh
 5. Open the exported project with Android Studio
 6. Compile, Run
 
-PS. When compiling on Android, you may got a similar error in `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536). This is because Android has a limit on the number of methods in a single jar.
+__NOTE1__: When compiling on Android, you may got a similar error in `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536). This is because Android has a limit on the number of methods in a single jar.
 
 you can fix it with the solution below:
 
@@ -98,6 +98,24 @@ android {
 
 ref url: https://stackoverflow.com/questions/48249633/errorcannot-fit-requested-classes-in-a-single-dex-file-try-supplying-a-main-dex .
 
+__NOTE2__: if your application is target Android 9 (API level 28) or higher, you might got "RPC Connect failed", when connect to BCX blockchain. one possible reason is "CLEARTEXT communication is not permitted". you can modify AndroidManifest.xml like below:
+
+AndroidManifest.xml :
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest ...>
+    <application
+        ...
+        android:usesCleartextTraffic="true" //add
+        ...>
+        ...
+    </application>
+</manifest>
+```
+
+ref url: https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted
+
+
 ### iOS
 
 1. clone bcx-unity (If you're already clone, ignore this step)
@@ -112,7 +130,7 @@ git clone https://github.com/Cocos-BCX/UnitySDK.git
 git submodule update --init
 ```
 
-3. generate library
+3. generate library (If you didn't modify the android/ios library, you can ignore this step without rebuilding)
 
 ```bash
 tool/genLibAndSync.sh

@@ -35,6 +35,7 @@ BCX-Unity-SDK 的实现基于 [BCX-Android-SDK](https://github.com/Cocos-BCX/And
 ### Unity
 
 1. [Untiy 2018.1+](https://unity.com/)
+2. git
 
 ## Android/iOS 库文件
 
@@ -48,14 +49,32 @@ BCX-Unity-SDK 的实现基于 [BCX-Android-SDK](https://github.com/Cocos-BCX/And
 
 ### Android
 
-1. Unity 中导出 Android 工程, 设置如下:
+1. clone bcx-unity (如果已经clone, 就忽略这一步)
+
+```bash
+git clone https://github.com/Cocos-BCX/UnitySDK.git
+```
+
+2. 在UnitySDK的根目录下更新它的子工程
+
+```bash
+git submodule update --init
+```
+
+3. 生成 Android/iOS 库(如果没有修改 Android/iOS 的代码的话，可以忽略这一步)
+
+```bash
+tool/genLibAndSync.sh
+```
+
+4. Unity 中导出 Android 工程, 设置如下:
 
 ![](./doc/android_export_setting.png)
 
-2. 用 Android Studio 打开导出后的工程
-3. 编译, 运行
+5. 用 Android Studio 打开导出后的工程
+6. 编译, 运行
 
-PS. 在 Android 上编译时, 你可能会遇到 `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536)` 类似的错误, 这是因为Android 对单个 jar 的方法数有限制.
+__NOTE1__: 在 Android 上编译时, 你可能会遇到 `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536)` 类似的错误, 这是因为Android 对单个 jar 的方法数有限制.
 
 要解决这个问题, 你可以如下修改 build.gradle 文件:
 
@@ -80,16 +99,52 @@ android {
 
 参见URL: https://www.jianshu.com/p/95211b445154
 
+__NOTE2__: 如果你的应用的目标是 Android 9 (API level 28) 或以上, 那么你在联接到 BCX 时, 可能会遇到 "RPC Connect failed". 这时很有可能的一个原因是 "CLEARTEXT communication is not permitted". 你可以像下面这样修改 AndroidManifest.xml :
+
+AndroidManifest.xml :
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest ...>
+    <application
+        ...
+        android:usesCleartextTraffic="true" //add
+        ...>
+        ...
+    </application>
+</manifest>
+```
+
+参见URL: https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted
+
+
 ### iOS
 
-1. Unity 中导出 iOS 工程
-2. 在导出后的 iOS 工程目录下, 运行 `pod install` (如果没有安装 `CocoaPods` , 需要先安装)
-3. 完成后，打开 `Unity-iPhone.xcworkspace`
-4. 在 Xcode 中, 修改 `Secp256k1_A` 的配置, 如图:
+1. clone bcx-unity (如果已经clone, 就忽略这一步)
+
+```bash
+git clone https://github.com/Cocos-BCX/UnitySDK.git
+```
+
+2. 在UnitySDK的根目录下更新它的子工程
+
+```bash
+git submodule update --init
+```
+
+3. 生成 Android/iOS 库(如果没有修改 Android/iOS 的代码的话，可以忽略这一步)
+
+```bash
+tool/genLibAndSync.sh
+```
+
+4. Unity 中导出 iOS 工程
+5. 在导出后的 iOS 工程目录下, 运行 `pod install` (如果没有安装 `CocoaPods` , 需要先安装)
+6. 完成后，打开 `Unity-iPhone.xcworkspace`
+7. 在 Xcode 中, 修改 `Secp256k1_A` 的配置, 如图:
 
 ![](./doc/xcode_secp_target_setting.png)
 
-5. 编译, 运行
+8. 编译, 运行
 
 
 ## 提示:
