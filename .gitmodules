@@ -1,6 +1,6 @@
 [submodule "android/AndroidSdk"]
 	path = android/AndroidSdk
-	url = https://github.com/Cocos-BCX/AndroidSdk.git
+	url = https://github.com/hugohuang1111/bcx-android-sdk.git
 [submodule "ios/iOSSDK"]
 	path = ios/iOSSDK
-	url = https://github.com/hugohuang1111/iOSSDK.git
+	url = https://github.com/hugohuang1111/bcx-ios-sdk.git
