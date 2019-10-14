@@ -1,23 +1,8 @@
 # BCX-Unity-SDK
 
-
 ## Introduction
 
 The BCX-Unity-SDK is based on [BCX-Android-SDK](https://github.com/Cocos-BCX/AndroidSdk) and [BCX-iOS-SDK](https://github.com/Cocos-BCX/iOSSDK) , which provide a series of interfaces for Unity to operate the BCX blockchain, allowing users to handle logins, transfers, trading assets, calling contracts, and more.
-
-## Project Description
-
-### Directory Introduction
-
-* `android` a wrapper library of BCX-Android-SDK, so can easily call from Unity
-* `ios` a wrapper library of BCX-iOS-SDK, so can easily call from Unity
-* `unity` BCX-Unity-SDK Project, BCX-Unity-SDK is export from this project
-
-### Script Introduction
-
-`tool/genLibAndSync.sh` Generate Android/iOS library and sync them to the BCX-Unity-SDK project.
-
-## BCX-Unity-SDK
 
 ## Environment
 
@@ -35,42 +20,22 @@ The BCX-Unity-SDK is based on [BCX-Android-SDK](https://github.com/Cocos-BCX/And
 1. [Untiy 2018.1+](https://unity.com/)
 2. git
 
-## Android/iOS Library
+## Sample
 
-Run the following command to automatically generate the library file of the corresponding platform.
+we provide a sample scene for test purposes, for invoke BCX-Unity-SDK APIs. it's located at `Assets/BCX/Sample/`
 
-```bash
-./tool/genLibAndSync.sh
-```
+### Test
 
-## Test
+#### Android
 
-### Android
+1. Open Unity
+2. Import BCX-Unity-SDK package
+3. Export Android project in Unity, with follow settings:
 
-1. clone bcx-unity (If you're already clone, ignore this step)
+![](./android_export_setting.png)
 
-```bash
-git clone https://github.com/Cocos-BCX/UnitySDK.git
-```
-
-2. update submodule under repo root path
-
-```bash
-git submodule update --init
-```
-
-3. generate library (If you didn't modify the android/ios library, you can ignore this step without rebuilding)
-
-```bash
-tool/genLibAndSync.sh
-```
-
-4. Export Android project in Unity, with follow settings:
-
-![](./unity/bcx/Assets/BCX/Document/android_export_setting.png)
-
-5. Open the exported project with Android Studio
-6. Compile, Run
+4. Open the exported project with Android Studio
+5. Compile, Run
 
 __NOTE1__: When compiling on Android, you may got a similar error in `Error: Cannot fit requested classes in a single dex file (# methods: 149346 > 65536). This is because Android has a limit on the number of methods in a single jar.
 
@@ -115,38 +80,20 @@ AndroidManifest.xml :
 
 ref url: https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted
 
+#### iOS
 
-### iOS
+1. Open Unity
+2. Import BCX-Unity-SDK package
+3. Export iOS project in Unity
+4. run `pod install` under the exported iOS project. (if you don't have `CocoaPods` installed, install it first)
+5. open `Unity-iPhone.xcworkspace` with Xcode
+6. Modify the configuration of `Secp256k1_A` as shown in the figure:
 
-1. clone bcx-unity (If you're already clone, ignore this step)
+![](./xcode_secp_target_setting.png)
 
-```bash
-git clone https://github.com/Cocos-BCX/UnitySDK.git
-```
+7. Compile, Run
 
-2. update submodule under repo root path
-
-```bash
-git submodule update --init
-```
-
-3. generate library (If you didn't modify the android/ios library, you can ignore this step without rebuilding)
-
-```bash
-tool/genLibAndSync.sh
-```
-
-4. Export iOS project in Unity
-5. run `pod install` under the exported iOS project. (if you don't have `CocoaPods` installed, install it first)
-6. open `Unity-iPhone.xcworkspace` with Xcode
-7. Modify the configuration of `Secp256k1_A` as shown in the figure:
-
-![](./unity/bcx/Assets/BCX/Document/xcode_secp_target_setting.png)
-
-8. Compile, Run
-
-
-## Hint:
+## Hint
 
 1. Many interfaces in BCX-iOS-SDK only receive id.  id and name  are both accepted in BCX-Android-SDK, so it is recommended to use id as much as possible. for example:
 
@@ -156,7 +103,6 @@ public static void calculate_invoking_contract_fee(string strAccount, string fee
 
 you can pass "COCOS"  or "1.3.0" to feeAssetSymbol parameter in Android.
 But in iOS, only "1.3.0" can be passed.
-
 
 ## API
 
