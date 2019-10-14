@@ -1,6 +1,8 @@
 
 .DS_Store
 Exports/
+Assets/AssetStoreTools/
+Assets/AssetStoreTools.meta
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
