@@ -1,3 +1,5 @@
+  [中文](https://github.com/CocosBCX/UnitySDK/blob/master/readme_cn.md)
+  
 # BCX-Unity-SDK
 
 
