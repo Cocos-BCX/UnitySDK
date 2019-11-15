@@ -16,16 +16,6 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void create_password_account( string strAccountName,  string strPassword,  bool isAutoLogin)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void create_wallet_account(string strAccountName, string strPassword, bool isAutoLogin)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
         public static void create_account(string strAccountName, string strPassword, string accountType, bool isAutoLogin)
         {
             Debug.Log(DUMMY_NOTE);
@@ -37,26 +27,6 @@ namespace BCX
         }
 
         public static void get_accounts(string accountId)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void lookup_account_names(string account_name)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_account_object(string strAccountNameOrId)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_account_id_by_name(string accountName)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_account_name_by_id(string accountId)
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -86,117 +56,47 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void list_nh_asset_order(int page, int pageSize)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
         public static void lookup_world_view(List<string> world_view_names)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void get_nh_creator(string account_id_or_name)
+        public static void list_nh_asset_by_creator(string account_id, string worldView, int page, int pageSize)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void list_nh_asset_by_creator(string account_id, int page, int pageSize)
+        public static void transfer_nh_asset(string password, string account_from, string account_to, string nh_asset_ids)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void transfer_nh_asset_fee(string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+        public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_ids)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void transfer_nh_asset(string password, string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+        public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void delete_nh_asset_fee(string fee_paying_account, string nhasset_id, string fee_symbol)
+        public static void buy_nh_asset(string fee_paying_account, string password, string order_Id)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_id, string fee_symbol)
+        public static void create_nh_asset_order(string otcaccount, string seller, string password, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void cancel_nh_asset_order_fee(string fee_paying_account, string order_id, string fee_symbol)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id, string fee_symbol)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id, string fee_paying_asset)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id, string fee_paying_asset)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void create_nh_asset_order_fee(string otcaccount, string seller, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_millis)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void create_nh_asset_order(string otcaccount, string seller, string password, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_millis)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void upgrade_to_lifetime_member_fee(string upgrade_account_id_or_symbol, string fee_paying_asset_id_or_symbol)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password, string fee_paying_asset_id_or_symbol)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void create_child_account_fee(string child_account, string child_account_password, string registrar_account_id_or_symbol, string pay_asset_symbol_or_id, string accountType)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void create_child_account(string child_account, string child_account_password, string registrar_account_id_or_symbol, string registrar_account_password, string pay_asset_symbol_or_id, string accountType)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_objects(List<string> ids)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_objects(string id)
+        public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
         public static void get_contract(string contractNameOrId)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void delete_account_by_name(string accountName)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void delete_account_by_id(string accountId)
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -231,22 +131,12 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void transfer_calculate_fee(string password, string from, string to, string strAmount, string strAssetSymbol, string strFeeSymbolOrId, string strMemo)
+        public static void invoking_contract(string strAccount, string password, string contractNameOrId, string functionName, string param)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void calculate_invoking_contract_fee(string strAccount, string feeAssetSymbol, string contractId, string functionName, string param)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void invoking_contract(string strAccount, string password, string feeAssetSymbol, string contractNameOrId, string functionName, string param)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strFeeSymbol, string strMemo)
+        public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strMemo)
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -261,22 +151,12 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void get_all_account_balances(string accountId)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
         public static void get_account_balances(string accountId, string assetsId)
         {
             Debug.Log(DUMMY_NOTE);
         }
 
         public static void get_block_header(double nBlockNumber)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
-        public static void get_global_properties()
         {
             Debug.Log(DUMMY_NOTE);
         }
@@ -301,17 +181,47 @@ namespace BCX
             Debug.Log(DUMMY_NOTE);
         }
 
-        public static void get_payment_qrcode_json(string accountName, string amount, string assetSymbol)
-        {
-            Debug.Log(DUMMY_NOTE);
-        }
-
         public static void get_version_info()
         {
             Debug.Log(DUMMY_NOTE);
         }
 
         public static void log_out()
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void get_estimation_gas(string amount)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void update_collateral_for_gas(string mortgagor, string password, string beneficiary, string amount)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void get_vesting_balances(string accountNameOrId)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void receive_vesting_balances(string accountNameOrId, string password, string awardId)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void get_committee_members(string support_account)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void get_witnesses_members(string support_account)
+        {
+            Debug.Log(DUMMY_NOTE);
+        }
+
+        public static void vote_members(string vote_account, string password, int type, List<string> vote_ids, string vote_count)
         {
             Debug.Log(DUMMY_NOTE);
         }

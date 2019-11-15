@@ -78,54 +78,29 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, world_view_names);
         }
 
-        public static void list_nh_asset_by_creator(string account_id, int page, int pageSize)
+        public static void list_nh_asset_by_creator(string account_id, string worldView, int page, int pageSize)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, account_id, page, pageSize);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, account_id, worldView, page, pageSize);
         }
 
-        public static void transfer_nh_asset_fee(string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+        public static void transfer_nh_asset(string password, string account_from, string account_to, string nh_asset_ids)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, account_from, account_to, fee_asset_symbol, nh_asset_id);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, account_from, account_to, str2list(nh_asset_ids));
         }
 
-        public static void transfer_nh_asset(string password, string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+        public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_ids)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, account_from, account_to, fee_asset_symbol, nh_asset_id);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, str2list(nhasset_ids));
         }
 
-        public static void delete_nh_asset_fee(string fee_paying_account, string nhasset_id, string fee_symbol)
+        public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, nhasset_id, fee_symbol);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, order_id);
         }
 
-        public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_id, string fee_symbol)
+        public static void buy_nh_asset(string fee_paying_account, string password, string order_Id)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, nhasset_id, fee_symbol);
-        }
-
-        public static void cancel_nh_asset_order_fee(string fee_paying_account, string order_id, string fee_symbol)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, order_id, fee_symbol);
-        }
-
-        public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id, string fee_symbol)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, order_id, fee_symbol);
-        }
-
-        public static void buy_nh_asset_fee(string fee_paying_account, string order_Id, string fee_paying_asset)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, order_Id);
-        }
-
-        public static void buy_nh_asset(string password, string fee_paying_account, string order_Id, string fee_paying_asset)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, fee_paying_account, order_Id);
-        }
-
-        public static void create_nh_asset_order_fee(string otcaccount, string seller, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_second * 1000);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, fee_paying_account, password, order_Id);
         }
 
         public static void create_nh_asset_order(string otcaccount, string seller, string password, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
@@ -133,14 +108,9 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, otcaccount, seller, password, pending_order_nh_asset, pending_order_fee, pending_order_fee_symbol, pending_order_memo, pending_order_price, pending_order_price_symbol, pending_order_valid_time_second * 1000);
         }
 
-        public static void upgrade_to_lifetime_member_fee(string upgrade_account_id_or_symbol, string fee_paying_asset_id_or_symbol)
+        public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, upgrade_account_id_or_symbol, fee_paying_asset_id_or_symbol);
-        }
-
-        public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password, string fee_paying_asset_id_or_symbol)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, upgrade_account_id_or_symbol, upgrade_account_password, fee_paying_asset_id_or_symbol);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, upgrade_account_id_or_symbol, upgrade_account_password);
         }
 
         public static void get_contract(string contractNameOrId)
@@ -178,24 +148,14 @@ namespace BCX
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, assetsSymbolOrId);
         }
 
-        public static void transfer_calculate_fee(string password, string from, string to, string strAmount, string strAssetSymbol, string strFeeSymbolOrId, string strMemo)
+        public static void invoking_contract(string strAccount, string password, string contractNameOrId, string functionName, string param)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, from, to, strAmount, strAssetSymbol, strFeeSymbolOrId, strMemo);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccount, password, contractNameOrId, functionName, param);
         }
 
-        public static void calculate_invoking_contract_fee(string strAccount, string feeAssetSymbol, string contractId, string functionName, string param)
+        public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strMemo)
         {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccount, feeAssetSymbol, contractId, functionName, param);
-        }
-
-        public static void invoking_contract(string strAccount, string password, string feeAssetSymbol, string contractNameOrId, string functionName, string param)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, strAccount, password, feeAssetSymbol, contractNameOrId, functionName, param);
-        }
-
-        public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strFeeSymbol, string strMemo)
-        {
-            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, strFrom, strTo, strAmount, strAssetSymbol, strFeeSymbol, strMemo);
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, password, strFrom, strTo, strAmount, strAssetSymbol, strMemo);
         }
 
         public static void get_block(string nBlockNumber)
@@ -247,6 +207,59 @@ namespace BCX
         {
             Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name);
         }
+
+        public static void get_estimation_gas(string amount)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, amount);
+        }
+
+        public static void update_collateral_for_gas(string mortgagor, string password, string beneficiary, string amount)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, mortgagor, password, beneficiary, amount);
+        }
+
+        public static void get_vesting_balances(string accountNameOrId)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountNameOrId);
+        }
+
+        public static void receive_vesting_balances(string accountNameOrId, string password, string awardId)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, accountNameOrId, password, awardId);
+        }
+
+        public static void get_committee_members(string support_account)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, support_account);
+        }
+
+        public static void get_witnesses_members(string support_account)
+        {
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, support_account);
+        }
+
+        /*
+         * @Param type: 1 -> witnesses, 0 -> committee
+         *
+         */
+        public static void vote_members(string vote_account, string password, int type, List<string> vote_ids, string vote_count)
+        {
+            string stype = "";
+            if (0 == type)
+            {
+                stype = "committee";
+            }
+            else if (1 == type)
+            {
+                stype = "witnesses";
+            }
+            else
+            {
+                Debug.Log("Invalid param type");
+            }
+            Invoke(System.Reflection.MethodBase.GetCurrentMethod().Name, vote_account, password, stype, vote_ids, vote_count);
+        }
+
 
 
         public static void notify_bcx_event(string evt, string json)
@@ -303,3 +316,4 @@ namespace BCX
 }
 
 #endif
+
