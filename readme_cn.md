@@ -71,7 +71,7 @@ tool/genLibAndSync.sh
 
 4. Unity 中导出 Android 工程, 设置如下:
 
-![](./doc/android_export_setting.png)
+![](./unity/bcx/Assets/BCX/Document/android_export_setting.png)
 
 5. 用 Android Studio 打开导出后的工程
 6. 编译, 运行
@@ -144,7 +144,7 @@ tool/genLibAndSync.sh
 6. 完成后，打开 `Unity-iPhone.xcworkspace`
 7. 在 Xcode 中, 修改 `Secp256k1_A` 的配置, 如图:
 
-![](./doc/xcode_secp_target_setting.png)
+![](./unity/bcx/Assets/BCX/Document/xcode_secp_target_setting.png)
 
 8. 编译, 运行
 
@@ -163,10 +163,12 @@ feeAssetSymbol 参数在 Android 中传 "COCOS", 或 “1.3.0” 都可以
 
 ## API
 
+>>
 ```C#
-public static void connect(string chainId, string nodeUrlString, string faucetUrl, string coreAsset, bool isOpenLog)
+public static void connect(string chainId, string nodeUrl, string faucetUrl, string coreAsset, bool isOpenLog)
 ```
 
+>>accountType: "ACCOUNT", "WALLET"
 ```C#
 public static void create_account(string strAccountName, string strPassword, string accountType, bool isAutoLogin)
 ```
@@ -213,52 +215,27 @@ public static void lookup_world_view(List<string> world_view_names)
 
 >>
 ```C#
-public static void list_nh_asset_by_creator(string account_id, int page, int pageSize)
+public static void list_nh_asset_by_creator(string account_id, string worldView, int page, int pageSize)
 ```
 
 >>
 ```C#
-public static void transfer_nh_asset_fee(string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+public static void transfer_nh_asset(string password, string account_from, string account_to, string nh_asset_ids)
 ```
 
 >>
 ```C#
-public static void transfer_nh_asset(string password, string account_from, string account_to, string fee_asset_symbol, string nh_asset_id)
+public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_ids)
 ```
 
 >>
 ```C#
-public static void delete_nh_asset_fee(string fee_paying_account, string nhasset_id, string fee_symbol)
+public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id)
 ```
 
 >>
 ```C#
-public static void delete_nh_asset(string fee_paying_account, string password, string nhasset_id, string fee_symbol)
-```
-
->>
-```C#
-public static void cancel_nh_asset_order_fee(string fee_paying_account, string order_id, string fee_symbol)
-```
-
->>
-```C#
-public static void cancel_nh_asset_order(string fee_paying_account, string password, string order_id, string fee_symbol)
-```
-
->>
-```C#
-public static void buy_nh_asset_fee(string fee_paying_account, string order_Id, string fee_paying_asset)
-```
-
->>
-```C#
-public static void buy_nh_asset(string password, string fee_paying_account, string order_Id, string fee_paying_asset)
-```
-
->>
-```C#
-public static void create_nh_asset_order_fee(string otcaccount, string seller, string pending_order_nh_asset, string pending_order_fee, string pending_order_fee_symbol, string pending_order_memo, string pending_order_price, string pending_order_price_symbol, long pending_order_valid_time_second)
+public static void buy_nh_asset(string fee_paying_account, string password, string order_Id)
 ```
 
 >>
@@ -268,12 +245,7 @@ public static void create_nh_asset_order(string otcaccount, string seller, strin
 
 >>
 ```C#
-public static void upgrade_to_lifetime_member_fee(string upgrade_account_id_or_symbol, string fee_paying_asset_id_or_symbol)
-```
-
->>
-```C#
-public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password, string fee_paying_asset_id_or_symbol)
+public static void upgrade_to_lifetime_member(string upgrade_account_id_or_symbol, string upgrade_account_password)
 ```
 
 >>
@@ -313,22 +285,12 @@ public static void lookup_asset_symbols(string assetsSymbolOrId)
 
 >>
 ```C#
-public static void transfer_calculate_fee(string password, string from, string to, string strAmount, string strAssetSymbol, string strFeeSymbolOrId, string strMemo)
+public static void invoking_contract(string strAccount, string password, string contractNameOrId, string functionName, string param)
 ```
 
 >>
 ```C#
-public static void calculate_invoking_contract_fee(string strAccount, string feeAssetSymbol, string contractId, string functionName, string param)
-```
-
->>
-```C#
-public static void invoking_contract(string strAccount, string password, string feeAssetSymbol, string contractNameOrId, string functionName, string param)
-```
-
->>
-```C#
-public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strFeeSymbol, string strMemo)
+public static void transfer(string password, string strFrom, string strTo, string strAmount, string strAssetSymbol, string strMemo)
 ```
 
 >>
@@ -383,15 +345,39 @@ public static void get_version_info()
 public static void log_out(string accountName)
 ```
 
+>>
+```C#
+public static void get_estimation_gas(string amount)
+```
 
+>>
+```C#
+public static void update_collateral_for_gas(string mortgagor, string password, string beneficiary, string amount)
+```
 
+>>
+```C#
+public static void get_vesting_balances(string accountNameOrId)
+```
 
-未来可用用测试的 trid
+>>
+```C#
+public static void receive_vesting_balances(string accountNameOrId, string password, string awardId)
+```
 
-3e676dd898f4b50c99b59febab4f424d57776ffbf9af9966957f0da546d2841b
+>>
+```C#
+public static void get_committee_members(string support_account)
+```
 
-"hugoo" : "1.2.72961"
-contract_id" : "1.16.42"
+>>
+```C#
+public static void get_witnesses_members(string support_account)
+```
 
+>> type: 1 -> witnesses, 0 -> committee
+```C#
+public static void vote_members(string vote_account, string password, int type, List<string> vote_ids, string vote_count)
+```
 
 

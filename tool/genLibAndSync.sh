@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 pushd $SHELL_FOLDER
 
