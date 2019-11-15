@@ -7,7 +7,7 @@ namespace BCX
 {
     public class BCXWrapperBase
     {
-        public static string VERSION = "0.0.2";
+        public static string VERSION = "1.0.0";
         public delegate void BCXEventHandler(string evt, string json);
 
         protected static List<string> str2list(string str)
